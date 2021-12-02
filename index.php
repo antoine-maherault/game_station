@@ -195,7 +195,7 @@ session_start();
 
 // __________ declare WORDS __________ //
 
-$_SESSION["words"]=["CRABE","CRAYON","ARAIGNEE","TOURNEVIS","OLIVE"];
+$_SESSION["words"]=["CRABE","CRAYON","ARAIGNEE","TOURNEVIS","OLIVE","CAFE","OS","TABLE","CHAT"];
 
 // __________ define current WORD __________ //
 

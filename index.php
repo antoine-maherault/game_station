@@ -231,7 +231,7 @@ if($_SESSION['erreur']==6){
 
 if(isset($_POST["newgame"])||$_SESSION["erreur"] >6){
     session_destroy();
-    header('Location:index copie.php');
+    header('Location:index.php');
 }
 
 ?>

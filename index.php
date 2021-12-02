@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
- <title> Runtrack PHP - Jour 7</title>
+ <title> Pendu</title>
  </head>
  <body>
 

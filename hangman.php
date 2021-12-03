@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
  <head>
- <title> Pendu</title>
+ <title> Runtrack PHP - Jour 7</title>
+ <meta name="viewport" content="width=device-width, initial-scale=0.5">
+
  </head>
  <body>
 
@@ -191,18 +193,27 @@ body{
 
 <?php 
 
-$word = str_split("CRABE");
 session_start();
+
+// __________ declare WORDS __________ //
+
+$_SESSION["words"]=["CRABE","CRAYON","ARAIGNEE","TOURNEVIS","OLIVE"];
+
+// __________ define current WORD __________ //
+
 if(!isset($_SESSION["display"])){
-    $_SESSION["display"]=["","","","",""];
+    $_SESSION["Cword"] = str_split($_SESSION["words"][array_rand($_SESSION["words"],1)]);
+    foreach($_SESSION["Cword"] as $word){
+        $_SESSION["display"][]="";
+    }
 }
 
-
+// __________Compare INPUT with WORD __________ //
 
 if(isset($_POST["letter"])){
     $i = 0;
     $OK = false;
-    foreach($word as $wletter){
+    foreach($_SESSION["Cword"] as $wletter){
         if(strtoupper($_POST["letter"]) == $wletter){
             $_SESSION["display"][$i] = $wletter;
             $OK = true;
@@ -214,15 +225,17 @@ if(isset($_POST["letter"])){
     }
 }
 
-if(isset($_POST["newgame"])){
-    session_destroy();
-    header('Location:hangman.php');
-}
-
 if($_SESSION['erreur']==6){
-    $_SESSION["display"]=["C","R","A","B","E"];
-
+    $_SESSION["display"]=$_SESSION["Cword"];
 }
+
+// __________Restart session for NEWGAME __________ //
+
+if(isset($_POST["newgame"])||$_SESSION["erreur"] >6){
+    session_destroy();
+    header('Location:index copie.php');
+}
+
 ?>
 <div class='newgame'> 
     <form method ="post">   
@@ -303,13 +316,30 @@ if($_SESSION['erreur']==6){
 </div>
 
 
-<div class='text'> 
+<?php
+// $_SESSION["words"]=["CRABE","CRAYON","ARAIGNEE","TOURNEVIS","OLIVE"];
+// $w = str_split($_SESSION["words"][array_rand($_SESSION["words"],1)]);
+$i = 0;
+
+echo "<div class='text'> ";
+
+foreach($_SESSION["Cword"] as $word){
+    $_SESSION["display"][]="";
+    $val = $_SESSION["display"][$i];
+    echo "<input maxlength = '1' type='text' name='1L' value=$val> </input>";
+    $i++;
+}
+echo "</div>";
+
+?>
+
+<!-- <div class='text'> 
     <input type='text' name='1L' value= <?php echo $_SESSION["display"][0]?>>  </input> 
     <input type='text' name='2L' value= <?php echo $_SESSION["display"][1]?>>  </input>   
     <input type='text' name='3L' value= <?php echo $_SESSION["display"][2]?>>  </input>   
     <input type='text' name='4L' value= <?php echo $_SESSION["display"][3]?>>  </input>   
     <input type='text' name='5L' value= <?php echo $_SESSION["display"][4]?>>  </input>     
-</div>
+</div> -->
 
 
 

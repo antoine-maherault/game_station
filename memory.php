@@ -19,9 +19,16 @@
     gap: 10px;
 }
 
+body{
+    display : flex;
+    flex-direction :row;
+    justify-content : center;
+    align-items: start;
+}
+
 button {
-width :120px;
-height :120px;
+width :115.5px;
+height :115.5px;
 height : 100%;
 background-color : darkslateblue;
 color : white;
@@ -29,6 +36,10 @@ font-size : 70px;
 font-weight : bold;
 border :none;
 
+}
+
+.ggame{
+    margin-top :50px;
 }
 
 form {
@@ -42,20 +53,31 @@ p {
 
 input {
     margin-top : 10px;
-    margin-left : 190px;
     border :none;
-    padding : 10px;
     font-family : monospace;
     font-size : 17px;
     background-color: white;
 }
 
 .newgame{
-    width :493px;
-    height :60px;
+    width : 440px;
+    height : 70px;
     background-color : darkslateblue;
+    display : flex;
+    flex-direction : row;
+    justify-content : center;
+    align-items : center;
+    gap : 10px;
     margin-top: 30px;
+}
 
+.newgame input{
+    padding : 7px;
+    margin-top : 32px;
+    background-color : white;
+    font-family : monospace;
+    border:none;
+    font-size : 20px;
 }
 
 </style>
@@ -158,12 +180,22 @@ if($_SESSION["count"]>2){
 
 
 ?>
-<div class="container">
+<div class="TTC">  <div class='newgame'> 
+    <form method ="post" action="ttc.php">   
+        <input type='submit' value='TIC TAC TOE' name='newgame'> </input> 
+    </form>   
+</div> </div>
+
+<div class="game">
+
+<div class="container"> 
 <div class="newgame">
     <form method="GET">
         <input type='submit' value='NEW GAME' name='restart'>  </input>   
     </form>
 </div>
+<div class="ggame">
+
 <form method = "get">
     <table>
     <tr> 
@@ -192,8 +224,14 @@ if($_SESSION["count"]>2){
         </tr>
 </table>
 </form>
-
-
 </div>
+</div>
+</div>
+
+<div class="hangman">  <div class='newgame'> 
+    <form method ="post" action="hangman.php">   
+        <input type='submit' value='HANGMAN' name='newgame'> </input> 
+    </form>   
+</div> </div>
 </body>
 </html>

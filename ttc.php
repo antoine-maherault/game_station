@@ -11,6 +11,14 @@
   height : 120px;
 }
 
+body{
+    display : flex;
+    flex-direction :row;
+    justify-content : center;
+    align-items: start;
+    gap : 20px;
+}
+
 .container{
     display : flex;
     flex-direction : column;
@@ -31,6 +39,10 @@ border :none;
 
 }
 
+.ggame{
+    margin-top :50px;
+}
+
 form {
 height : 100px;
 }
@@ -40,21 +52,26 @@ p {
     font-size : 30px;
 }
 
-input {
-    margin-top : 10px;
-    margin-left : 135px;
-    border :none;
-    padding : 10px;
-    font-family : monospace;
-    font-size : 17px;
-    background-color: white;
+.newgame{
+    width : 440px;
+    height : 70px;
+    background-color : darkslateblue;
+    display : flex;
+    flex-direction : row;
+    justify-content : center;
+    align-items : center;
+    gap : 10px;
+    margin-top: 30px;
 }
 
-.newgame{
-    width :370px;
-    height :60px;
-    background-color : darkslateblue;
-    margin-top: 30px;
+.newgame input{
+    padding : 7px;
+    margin-top : 32px;
+    background-color : white;
+    font-family : monospace;
+    border:none;
+    font-size : 20px;
+}
 }
 </style>
 
@@ -105,12 +122,23 @@ if(isset($_GET['restart'])){
 }
 
 ?>
+
+<div class="HANGMAN">  <div class='newgame'> 
+    <form method ="post" action="hangman.php">   
+        <input type='submit' value='HANGMAN' name='newgame'> </input> 
+    </form>   
+</div> </div>
+
+<div class="game">
+
 <div class="container">
 <div class="newgame">
     <form method="GET">
         <input type='submit' value='NEW GAME' name='restart'>  </input>   
     </form>
 </div>
+<div class="ggame">
+
 <form method = "get">
     <table>
     <tr> 
@@ -132,7 +160,14 @@ if(isset($_GET['restart'])){
 </table>
 </form>
 
-
 </div>
+</div>
+</div>
+
+<div class="memory">  <div class='newgame'> 
+    <form method ="post" action="memory.php">   
+        <input type='submit' value='MEMORY' name='newgame'> </input> 
+    </form>   
+</div> </div>
 </body>
 </html>

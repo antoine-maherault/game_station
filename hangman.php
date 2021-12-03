@@ -27,6 +27,14 @@ p {
 
 body{
     display : flex;
+    flex-direction :row;
+    justify-content : center;
+    align-items: start;
+    gap : 20px;
+}
+
+.game{
+    display : flex;
     flex-direction :column;
     justify-content : center;
     align-items: center;
@@ -233,10 +241,17 @@ if($_SESSION['erreur']==6){
 
 if(isset($_POST["newgame"])||$_SESSION["erreur"] >6){
     session_destroy();
-    header('Location:index copie.php');
+    header('Location:hangman.php');
 }
 
 ?>
+<div class="TTC">  <div class='newgame'> 
+    <form method ="post" action="ttc.php">   
+        <input type='submit' value='TIC TAC TOE' name='newgame'> </input> 
+    </form>   
+</div> </div>
+
+<div class="game">
 <div class='newgame'> 
     <form method ="post">   
         <input type='submit' value='NEW GAME' name='newgame'> </input> 
@@ -315,7 +330,6 @@ if(isset($_POST["newgame"])||$_SESSION["erreur"] >6){
 
 </div>
 
-
 <?php
 // $_SESSION["words"]=["CRABE","CRAYON","ARAIGNEE","TOURNEVIS","OLIVE"];
 // $w = str_split($_SESSION["words"][array_rand($_SESSION["words"],1)]);
@@ -341,8 +355,13 @@ echo "</div>";
     <input type='text' name='5L' value= <?php echo $_SESSION["display"][4]?>>  </input>     
 </div> -->
 
+</div>
 
-
+<div class="memory">  <div class='newgame'> 
+    <form method ="post" action="memory.php">   
+        <input type='submit' value='MEMORY' name='newgame'> </input> 
+    </form>   
+</div> </div>
 
 </body>
 </html>

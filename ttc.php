@@ -92,7 +92,7 @@ if (!isset($_SESSION["tab"])){
 // 
 
 // ___________PLAY___________ //
-if($_SESSION["count"]%2 && sizeof($_SESSION["empty"])>=1 ){
+if($_SESSION["count"]%2 && sizeof($_SESSION["empty"])>=1 && !isset($_SESSION['over'])){
     while($over == false){
         $box = rand(0, 8);
         if($_SESSION["tab"][$box]=='&nbsp'){
@@ -104,7 +104,7 @@ if($_SESSION["count"]%2 && sizeof($_SESSION["empty"])>=1 ){
         }
     }         
 }
-elseif(isset($_GET)){
+elseif(isset($_GET)&& !isset($_SESSION['over'])){
     if($_SESSION["tab"][key($_GET)-1]=='&nbsp'){
         $_SESSION["tab"][key($_GET)-1] = "X";
         $_SESSION["count"] ++;
@@ -112,8 +112,43 @@ elseif(isset($_GET)){
         header('Location:ttc.php');
     }
 }
+// ___________Is GAME over ?___________ //
 
-$count = 0;
+if($_SESSION["tab"][3] == $_SESSION["tab"][0] && $_SESSION["tab"][3] == $_SESSION["tab"][6] && $_SESSION["tab"][0] != '&nbsp' && $_SESSION["tab"][3] != '&nbsp' && $_SESSION["tab"][6] != '&nbsp'){ // A1 B1 C1 
+    $_SESSION['over'] = $_SESSION["tab"][3];
+}
+if($_SESSION["tab"][4] == $_SESSION["tab"][1] && $_SESSION["tab"][4] == $_SESSION["tab"][7] && $_SESSION["tab"][1] != '&nbsp' && $_SESSION["tab"][4] != '&nbsp' && $_SESSION["tab"][7] != '&nbsp'){ // A2 B2 C2 
+    $_SESSION['over'] = $_SESSION["tab"][4];
+}
+if($_SESSION["tab"][5] == $_SESSION["tab"][2] && $_SESSION["tab"][5] == $_SESSION["tab"][8] && $_SESSION["tab"][2] != '&nbsp' && $_SESSION["tab"][5] != '&nbsp' && $_SESSION["tab"][6] != '&nbsp'){ // A3 B3 C3 
+    $_SESSION['over'] = $_SESSION["tab"][5];
+}
+
+if($_SESSION["tab"][1] == $_SESSION["tab"][0] && $_SESSION["tab"][1] == $_SESSION["tab"][2] && $_SESSION["tab"][0] != '&nbsp' && $_SESSION["tab"][1] != '&nbsp' && $_SESSION["tab"][2] != '&nbsp'){ // A1 A2 A3 
+    $_SESSION['over'] = $_SESSION["tab"][1];
+}
+if($_SESSION["tab"][4] == $_SESSION["tab"][3] && $_SESSION["tab"][4] == $_SESSION["tab"][5] && $_SESSION["tab"][3] != '&nbsp' && $_SESSION["tab"][4] != '&nbsp' && $_SESSION["tab"][5] != '&nbsp'){ // B1 B2 B3 
+    $_SESSION['over'] = $_SESSION["tab"][5];
+}
+if($_SESSION["tab"][7] == $_SESSION["tab"][6] && $_SESSION["tab"][7] == $_SESSION["tab"][8] && $_SESSION["tab"][6] != '&nbsp' && $_SESSION["tab"][7] != '&nbsp' && $_SESSION["tab"][8] != '&nbsp'){ // C1 C2 C3 
+    $_SESSION['over'] = $_SESSION["tab"][7];
+}
+
+if($_SESSION["tab"][4] == $_SESSION["tab"][2] && $_SESSION["tab"][4] == $_SESSION["tab"][6] && $_SESSION["tab"][2] != '&nbsp' && $_SESSION["tab"][4] != '&nbsp' && $_SESSION["tab"][6] != '&nbsp'){ // A3 B2 C1 
+    $_SESSION['over'] = $_SESSION["tab"][4];
+}
+if($_SESSION["tab"][4] == $_SESSION["tab"][0] && $_SESSION["tab"][4] == $_SESSION["tab"][8] && $_SESSION["tab"][0] != '&nbsp' && $_SESSION["tab"][4] != '&nbsp' && $_SESSION["tab"][8] != '&nbsp'){ // A1 B2 C3 
+    $_SESSION['over'] = $_SESSION["tab"][4];
+}
+
+// ___________RESULT___________ //
+
+if(count($_SESSION["empty"]) <1 ){
+    $_SESSION['over'] = $_SESSION["tab"];
+    // always check neighbors for every box and determine if game over 
+
+}
+
 // ___________RESTART___________ //
 
 if(isset($_GET['restart'])){
@@ -158,11 +193,15 @@ if(isset($_GET['restart'])){
         </tr>
     <tr> 
 </table>
+
 </form>
 
 </div>
+
 </div>
+
 </div>
+
 
 <div class="memory">  <div class='newgame'> 
     <form method ="post" action="memory.php">   

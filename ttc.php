@@ -89,22 +89,165 @@ if (!isset($_SESSION["tab"])){
 
 
 // ___________EMPTY BOX___________ //
-// 
+
+// if($_SESSION["tab"][0]==$_SESSION["tab"][1]||$_SESSION["tab"][0]==$_SESSION["tab"][2]||$_SESSION["tab"][1]==$_SESSION["tab"][2]){
+//     while($over2 == false){
+//         $box2 = rand(0, 2);
+//         if(($_SESSION["tab"][$box2]=='&nbsp')){
+//             $_SESSION["tab"][$box] = "O";
+//             $_SESSION["count"] ++;
+//             $over = true;
+//             $over2 = true;
+//             unset($_SESSION["empty"][$box]);
+//             header('Location:ttc.php');
+//         }
+//     }
+// }
 
 // ___________PLAY___________ //
-if($_SESSION["count"]%2 && sizeof($_SESSION["empty"])>=1 && !isset($_SESSION['over'])){
+if($_SESSION["count"]%2 && sizeof($_SESSION["empty"])>=1 && !isset($_SESSION['over'])&& $_SESSION["count"]<8){ // computer
     while($over == false){
         $box = rand(0, 8);
-        if($_SESSION["tab"][$box]=='&nbsp'){
+        if($_SESSION["tab"][4]=='&nbsp'){ // play center if free
+            $_SESSION["tab"][4] = "O";
+            $_SESSION["count"] ++;
+            $over = true;
+            unset($_SESSION["empty"][$box]);
+            header('Location:ttc.php');
+        }
+        elseif($_SESSION["c1"] <2 && ($_SESSION["tab"][0]==$_SESSION["tab"][1]||$_SESSION["tab"][0]==$_SESSION["tab"][2]||$_SESSION["tab"][1]==$_SESSION["tab"][2]) && ($_SESSION["tab"][0]=='X'||$_SESSION["tab"][1]=='X'||$_SESSION["tab"][2]=='X')){
+            if($_SESSION["tab"][0]==$_SESSION["tab"][1]&&$_SESSION["tab"][2]=='&nbsp'&&$_SESSION["tab"][1]=='X'&&$_SESSION["tab"][0]=='X'){
+                $_SESSION["tab"][2] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][0]==$_SESSION["tab"][2]&&$_SESSION["tab"][1]=='&nbsp'&&$_SESSION["tab"][2]=='X'&&$_SESSION["tab"][0]=='X'){
+                $_SESSION["tab"][1] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][1]==$_SESSION["tab"][2]&&$_SESSION["tab"][0]=='&nbsp'&&$_SESSION["tab"][1]=='X'&&$_SESSION["tab"][2]=='X'){
+                $_SESSION["tab"][0] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            $_SESSION["c1"]++;
+        }
+        elseif($_SESSION["c2"] <2 && ($_SESSION["tab"][0]==$_SESSION["tab"][3]||$_SESSION["tab"][0]==$_SESSION["tab"][6]||$_SESSION["tab"][3]==$_SESSION["tab"][6]) && ($_SESSION["tab"][0]=='X'||$_SESSION["tab"][3]=='X'||$_SESSION["tab"][6]=='X')){
+            if($_SESSION["tab"][0]==$_SESSION["tab"][3]&&$_SESSION["tab"][6]=='&nbsp'&&$_SESSION["tab"][0]=='X'&&$_SESSION["tab"][3]=='X'){
+                $_SESSION["tab"][6] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][3]==$_SESSION["tab"][6]&&$_SESSION["tab"][0]=='&nbsp'&&$_SESSION["tab"][3]=='X'&&$_SESSION["tab"][6]=='X'){
+                $_SESSION["tab"][0] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][0]==$_SESSION["tab"][6]&&$_SESSION["tab"][3]=='&nbsp'&&$_SESSION["tab"][0]=='X'&&$_SESSION["tab"][6]=='X'){
+                $_SESSION["tab"][3] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            $_SESSION["c2"]++;
+        }
+        elseif($_SESSION["c3"] <2 && ($_SESSION["tab"][6]==$_SESSION["tab"][8]||$_SESSION["tab"][8]==$_SESSION["tab"][7]||$_SESSION["tab"][6]==$_SESSION["tab"][7]) && ($_SESSION["tab"][6]=='X'||$_SESSION["tab"][7]=='X'||$_SESSION["tab"][8]=='X')){
+            if($_SESSION["tab"][6]==$_SESSION["tab"][7]&&$_SESSION["tab"][8]=='&nbsp'&&$_SESSION["tab"][6]=='X'&&$_SESSION["tab"][7]=='X'){
+                $_SESSION["tab"][8] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][7]==$_SESSION["tab"][8]&&$_SESSION["tab"][6]=='&nbsp'&&$_SESSION["tab"][7]=='X'&&$_SESSION["tab"][8]=='X'){
+                $_SESSION["tab"][6] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][6]==$_SESSION["tab"][8]&&$_SESSION["tab"][7]=='&nbsp'&&$_SESSION["tab"][6]=='X'&&$_SESSION["tab"][8]=='X'){
+                $_SESSION["tab"][7] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            $_SESSION["c3"]++;
+        }
+        elseif($_SESSION["c4"] <2 && ($_SESSION["tab"][2]==$_SESSION["tab"][5]||$_SESSION["tab"][5]==$_SESSION["tab"][8]||$_SESSION["tab"][2]==$_SESSION["tab"][8]) && ($_SESSION["tab"][2]=='X'||$_SESSION["tab"][5]=='X'||$_SESSION["tab"][8]=='X')){
+            if($_SESSION["tab"][2]==$_SESSION["tab"][5]&&$_SESSION["tab"][8]=='&nbsp'&&$_SESSION["tab"][2]=='X'&&$_SESSION["tab"][5]=='X'){
+                $_SESSION["tab"][8] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][5]==$_SESSION["tab"][8]&&$_SESSION["tab"][2]=='&nbsp'&&$_SESSION["tab"][5]=='X'&&$_SESSION["tab"][8]=='X'){
+                $_SESSION["tab"][2] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][2]==$_SESSION["tab"][8]&&$_SESSION["tab"][5]=='&nbsp'&&$_SESSION["tab"][2]=='X'&&$_SESSION["tab"][8]=='X'){
+                $_SESSION["tab"][5] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            $_SESSION["c4"]++;
+        }
+        elseif($_SESSION["c5"] <2 && ($_SESSION["tab"][0]==$_SESSION["tab"][4]||$_SESSION["tab"][4]==$_SESSION["tab"][8]||$_SESSION["tab"][0]==$_SESSION["tab"][8]) && ($_SESSION["tab"][0]=='X'||$_SESSION["tab"][4]=='X'||$_SESSION["tab"][8]=='X')){
+            if($_SESSION["tab"][0]==$_SESSION["tab"][4]&&$_SESSION["tab"][8]=='&nbsp'&&$_SESSION["tab"][0]=='X'&&$_SESSION["tab"][4]=='X'){
+                $_SESSION["tab"][8] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][4]==$_SESSION["tab"][8]&&$_SESSION["tab"][0]=='&nbsp'&&$_SESSION["tab"][4]=='X'&&$_SESSION["tab"][8]=='X'){
+                $_SESSION["tab"][0] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            if($_SESSION["tab"][0]==$_SESSION["tab"][8]&&$_SESSION["tab"][4]=='&nbsp'&&$_SESSION["tab"][0]=='X'&&$_SESSION["tab"][8]=='X'){
+                $_SESSION["tab"][4] = "O";
+                $_SESSION["count"] ++;
+                $over = true;
+                unset($_SESSION["empty"][$box]);
+                header('Location:ttc.php');
+            }
+            $_SESSION["c5"]++;
+        }
+        elseif($_SESSION["tab"][$box]=='&nbsp'){ // play random
             $_SESSION["tab"][$box] = "O";
             $_SESSION["count"] ++;
             $over = true;
             unset($_SESSION["empty"][$box]);
             header('Location:ttc.php');
         }
+        elseif($_SESSION["count"]==8){
+            $over = true;
+        }
     }         
 }
-elseif(isset($_GET)&& !isset($_SESSION['over'])){
+elseif(isset($_GET)&& !isset($_SESSION['over'])){ // player 
     if($_SESSION["tab"][key($_GET)-1]=='&nbsp'){
         $_SESSION["tab"][key($_GET)-1] = "X";
         $_SESSION["count"] ++;
@@ -145,8 +288,6 @@ if($_SESSION["tab"][4] == $_SESSION["tab"][0] && $_SESSION["tab"][4] == $_SESSIO
 
 if(count($_SESSION["empty"]) <1 ){
     $_SESSION['over'] = $_SESSION["tab"];
-    // always check neighbors for every box and determine if game over 
-
 }
 
 // ___________RESTART___________ //
@@ -193,7 +334,6 @@ if(isset($_GET['restart'])){
         </tr>
     <tr> 
 </table>
-
 </form>
 
 </div>
